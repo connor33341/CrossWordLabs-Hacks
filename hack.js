@@ -83,6 +83,13 @@ SOFTWARE.
     </ol>
   </body>
   `;
-  popup = window.open('about:blank', '', 'width=600 height=400');
-  popup.document.write(popup_html);
+  const popup = window.open('about:blank', '', 'width=600 height=400');
+  if (popup) {
+    popup.document.write(popup_html);
+  } else {
+    const answersEl = document.createElement('div');
+    answersEl.style.cssText = 'position:fixed;top:10px;right:10px;max-width:400px;max-height:80vh;overflow:auto;background:#fff;border:1px solid #000;padding:16px;z-index:9999;font-family:Arial;box-shadow:0 2px 8px rgba(0,0,0,.3)';
+    answersEl.innerHTML = '<h1>Answers</h1><ol>' + answers.map(a => '<li>' + a + '</li>').join('') + '</ol>';
+    document.body.appendChild(answersEl);
+  }
 })()
